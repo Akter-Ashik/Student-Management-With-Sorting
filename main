@@ -1,0 +1,246 @@
+#include<stdlib.h>
+#include<string.h>
+#include<stdio.h>
+
+//structure
+struct Student
+
+{
+    int ID;
+    char name[100];
+    char semester[100];
+    char phone[100];
+    float CGPA;
+    struct Student *next;
+
+}* head;
+
+//Linked list insertation
+void insert(int ID, char* name, char* semester, char* phone, float CGPA)
+{
+
+    struct Student * student = (struct Student *) malloc(sizeof(struct Student));
+  student->ID = ID;
+  strcpy(student->name, name);
+    strcpy(student->semester, semester);
+  strcpy(student->phone, phone);
+  student->CGPA = CGPA;
+  student->next = NULL;
+
+  if(head==NULL){
+    // if head is NULL
+    // set student as the new head
+    head = student;
+  }
+  else{
+    // if list is not empty
+    // insert student in beginning of head
+    student->next = head;
+    head = student;
+  }
+
+}
+
+//Search in linked list
+void search(int ID)
+{
+    struct Student * temp = head;
+  while(temp!=NULL){
+    if(temp->ID==ID){
+      printf("\n\t\t\tLast four(4) digit from ID Number : %d\n", temp->ID);
+      system("COLOR 6");
+      printf("\t\t\tNick Name : %s\n", temp->name);
+            printf("\t\t\tCurrent Semeste : %s\n", temp->semester);
+      printf("\t\t\tPhone : %s\n", temp->phone);
+      printf("\t\t\tCGPA : %0.2f\n", temp->CGPA);
+      return;
+    }
+    temp = temp->next;
+  }
+  printf("\n\t\t\tStudent with ID number %d is not found !!!\n", ID);
+}
+
+//Linked list updation
+void update(int ID)
+{
+system("COLOR 6");
+    struct Student * temp = head;
+  while(temp!=NULL){
+
+    if(temp->ID==ID){
+      printf("\n\t\t\tRecord with ID number %d Found !!!\n", ID);
+      printf("\t\t\tEnter new nick name: ");
+      scanf("%s", temp->name);
+
+      printf("\t\t\tEnter new semester: ");
+      scanf("%s", temp->semester);
+
+      printf("\t\t\tEnter new phone number: ");
+      scanf("%s", temp->phone);
+
+      printf("\t\t\tEnter new CGPA: ");
+      scanf("%f",&temp->CGPA);
+
+      printf("\n\t\t\tUpdation Successful!!!\n");
+      return;
+    }
+    temp = temp->next;
+
+  }
+  printf("\n\t\t\tStudent with ID number %d is not found !!!\n", ID);
+
+}
+
+// Delete elements in linked list
+void Delete(int ID)
+{
+system("COLOR 6");
+    struct Student * temp1 = head;
+  struct Student * temp2 = head;
+  while(temp1!=NULL){
+
+    if(temp1->ID==ID){
+
+      printf("\n\t\t\tRecord with ID number %d found !!!\n", ID);
+
+      if(temp1==temp2){
+        // this condition will run if
+        // the record that we need to delete is the first node
+        // of the linked list
+        head = head->next;
+        free(temp1);
+      }
+      else{
+        // temp1 is the node we need to delete
+        // temp2 is the node previous to temp1
+        temp2->next = temp1->next;
+        free(temp1);
+      }
+
+      printf("\n\t\t\tRecord Successfully Deleted !!!\n");
+      return;
+
+    }
+    temp2 = temp1;
+    temp1 = temp1->next;
+
+  }
+  printf("\n\t\t\tStudent with ID number %d is not found !!!\n", ID);
+
+}
+
+// Display function in linked list
+void display()
+{
+system("COLOR 6");
+    struct Student * temp = head;
+  while(temp!=NULL){
+
+    printf("\n\t\t\tLast four(4) digit from ID number : %d\n", temp->ID);
+    printf("\t\t\tName : %s\n", temp->name);
+    printf("\t\t\tCurrent semester : %s\n", temp->semester);
+    printf("\t\t\tPhone : %s\n", temp->phone);
+    printf("\t\t\tCurrent CGPA : %0.2f\n\n", temp->CGPA);
+    temp = temp->next;
+
+  }
+}
+
+int main()
+{
+    head = NULL;
+    int choice;
+    char name[100];
+    char semester[100];
+    char phone[100];
+    int ID;
+    float CGPA;
+    Atik, [06.08.21 15:41]
+system("COLOR 6");
+    printf("\n\n\t\t------------------------------------------------------------\n");
+    printf("\t\t|**********************************************************|\n");
+    printf("\t\t|                                                          |\n");
+    printf("\t\t|                                                          |\n");
+    printf("\t\t|                        Welcome                           |\n");
+    printf("\t\t|                          to                              |\n");
+    printf("\t\t|                  Student Record System                   |\n");
+    printf("\t\t|                                                          |\n");
+    printf("\t\t|                                                          |\n");
+    printf("\t\t|----------------------------------------------------------|\n");
+    printf("\t\t************************************************************\n");
+    printf("\n\n");
+
+    printf("\n\n\t\t\t|---------------------------------------|\n");
+    printf("\t\t\t|      Press Any Digit From Below       |\n");
+    printf("\t\t\t|---------------------------------------|\n");
+
+    printf("\n\n\t\t\tPress : 1 To insert student details.\n\t\t\tPress : 2 To search for student details.\n\t\t\tPress : 3 To delete student details.\n\t\t\tPress : 4 To update student details.\n\t\t\tPress : 5 To display all student details.\n\t\t\tPress : 6 To EXIT.");
+
+    do
+    {
+        printf("\n\n\t\t\tEnter Your Choice: ");
+        scanf("%d", &choice);
+        // Switch case function
+        switch (choice)
+        {
+
+            case 1:
+                printf("\n\t\t\tEnter Last Four(4) Digit From ID Number : ");
+                scanf("%d", &ID);
+
+                printf("\t\t\tEnter Nick Name: ");
+                scanf("%s", name);
+
+                printf("\t\t\tEnter Current Semester (L1T1, L1T2, L1T3) : ");
+                scanf("%s", semester);
+
+                printf("\t\t\tEnter Phone Number: ");
+                scanf("%s", phone);
+
+                printf("\t\t\tEnter Current CGPA: ");
+                scanf("%f", &CGPA);
+
+                insert(ID, name, semester, phone, CGPA);
+                break;
+
+            case 2:
+                printf("\n\t\t\tEnter last four(4) digit from ID number to search : ");
+                scanf("%d", &ID);
+                search(ID);
+                break;
+
+            case 3:
+                printf("\n\t\t\tEnter last four(4) digit from ID number to delete : ");
+                scanf("%d", &ID);
+                Delete(ID);
+                break;
+
+            case 4:
+                printf("\n\t\t\tEnter last four(4) digit from ID number to update : ");
+                scanf("%d", &ID);
+                update(ID);
+                break;
+
+            case 5:
+                display();
+                break;
+
+            case 6:
+                printf("\n\n\n\t\t\t\t\t\tExit ");
+                printf("\n\n\t\t\t|********************************************|\n");
+                printf("\t\t\t|        Thanks For Using Our Software       |\n");
+                printf("\t\t\t|********************************************|\n");
+                exit(0);
+                break;
+
+            default :
+                printf("\n\t\t\tInvalid choice\n");
+                printf("\n\t\t\tPlease enter a valid choice\n");
+                break;
+        }
+
+    }
+
+    while (choice != 0);
+
+}
